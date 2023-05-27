@@ -20,3 +20,7 @@
   width: 100vw;
   background-position: center;
 }
+
+.ant-btn-primary:not([disabled]) {
+  background: #0f172a !important;
+}

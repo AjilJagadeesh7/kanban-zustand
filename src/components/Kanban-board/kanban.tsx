@@ -1,7 +1,8 @@
-import Columns from "./components/columns";
-import TaskInput from "./components/taskInput";
+import React from "react";
+import Columns from "./columns";
+import TaskInput from "../Tasks/taskInput";
 
-function App() {
+const Kanban = () => {
   return (
     <div
       className="bg-gray-900 min-h-screen flex justify-center items-center md:items-start
@@ -13,6 +14,6 @@ function App() {
       <TaskInput />
     </div>
   );
-}
+};
 
-export default App;
+export default Kanban;

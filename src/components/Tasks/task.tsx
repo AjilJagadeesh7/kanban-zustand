@@ -1,10 +1,22 @@
 import moment from "moment";
-import { useTaskStore } from "../store/store";
+import { useTaskStore } from "../../store/taskStore";
 import { shallow } from "zustand/shallow";
-import { ReactComponent as TrashLogo } from "../assets/trash.svg";
+import { ReactComponent as TrashLogo } from "../../assets/trash.svg";
+import React from "react";
 
-/* eslint-disable react/prop-types */
-const Task = ({ id, title, state, date, serial }) => {
+const Task = ({
+  id,
+  title,
+  state,
+  date,
+  serial,
+}: {
+  id: string | number;
+  title: string;
+  state: string;
+  date: string;
+  serial: number;
+}) => {
   const deleteTask = useTaskStore((store) => store.deleteTask, shallow);
   const setDraggedTask = useTaskStore((store) => store.setDraggedTask, shallow);
   return (

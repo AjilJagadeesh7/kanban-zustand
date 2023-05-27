@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useInputModalStore, useTaskStore } from "../store/store";
+import { useTaskStore } from "../../store/taskStore";
 import { shallow } from "zustand/shallow";
-import Task from "./task";
+import Task from "../Tasks/task";
+import { useInputModalStore } from "../../store/inputStore";
+import React from "react";
 
 const Columns = ({ state }) => {
   const tasks = useTaskStore(

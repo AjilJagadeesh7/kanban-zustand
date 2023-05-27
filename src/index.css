@@ -7,3 +7,16 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.ant-modal .ant-modal-content {
+  background-color: transparent;
+  padding: 0;
+}
+
+.container {
+  background-image: url("./assets/bgImage.jpg");
+  background-size: cover;
+  height: 80vh;
+  width: 100vw;
+  background-position: center;
+}

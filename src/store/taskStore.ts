@@ -1,7 +1,23 @@
-import { create } from "zustand";
+import { StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const taskStore = (set) => ({
+interface Task {
+  id: number | string;
+  title: string;
+  state: string;
+  date: string;
+}
+
+interface TaskStoreState {
+  tasks: Task[];
+  draggedTask: string | number | null;
+  addTask: (title: string, state: string, date: string) => void;
+  deleteTask: (id: number | string) => void;
+  setDraggedTask: (id: string | number | null) => void;
+  moveTask: (id: number | string | null, state: string) => void;
+}
+
+const taskStore: StateCreator<TaskStoreState> = (set) => ({
   tasks: [],
   draggedTask: null,
   addTask: (title, state, date) =>
@@ -28,15 +44,4 @@ const taskStore = (set) => ({
     })),
 });
 
-const inputModalStore = (set) => ({
-  show: false,
-  state: "PLANNED",
-  toggleModal: () =>
-    set((store) => {
-      return { show: !store.show };
-    }),
-  selectState: (state) => set(() => ({ state: state })),
-});
-
 export const useTaskStore = create(persist(taskStore, { name: "tasks" }));
-export const useInputModalStore = create(inputModalStore);

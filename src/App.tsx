@@ -7,9 +7,10 @@ import ErrorPage from "./components/Routes/errorPage";
 import SignIn from "./components/Auth/signIn";
 import RegisterForm from "./components/Auth/register";
 import { useThemeStore } from "./store/themeStore";
+import { useAuthStore } from "./store/authStore";
 
 function App() {
-  const isLoggedIn = false;
+  const user = useAuthStore((store) => store.user);
   const darkMode = useThemeStore((store) => store.darkMode);
 
   useEffect(() => {
@@ -23,10 +24,10 @@ function App() {
     >
       <Router>
         <Routes>
-          <Route element={<ProtectedRoute user={isLoggedIn} />}>
+          <Route element={<ProtectedRoute user={user} />}>
             <Route path="/" element={<Home />} />
           </Route>
-          <Route element={<AuthContainer isLoggedIn={isLoggedIn} />}>
+          <Route element={<AuthContainer user={user} />}>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/register" element={<RegisterForm />} />
           </Route>

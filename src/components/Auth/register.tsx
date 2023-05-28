@@ -2,11 +2,19 @@ import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/authStore";
 
 const RegisterForm = () => {
+  const createUser = useAuthStore((store) => store.createUser);
   const navigate = useNavigate();
-  const onFinish = (values) => {
-    console.log("Form values:", values);
+
+  const onFinish = async (values) => {
+    const { firstName, lastName, password, email } = values;
+    if (firstName && lastName && password && email) {
+      createUser(email, password, firstName, lastName);
+    } else {
+      console.error("Missing details");
+    }
   };
 
   return (

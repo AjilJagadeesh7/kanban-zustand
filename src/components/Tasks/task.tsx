@@ -23,7 +23,7 @@ const Task = ({
     <div
       draggable
       onDragStart={() => setDraggedTask(id)}
-      className="my-3 bg-gray-700 rounded-[4px] min-h-[5rem] flex flex-col 
+      className="my-3 bg-primaryLight dark:bg-primaryDark rounded-[4px] min-h-[5rem] flex flex-col 
       justify-between text-gray-300 p-2"
     >
       <div className="font-medium text-sm">

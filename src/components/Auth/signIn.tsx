@@ -3,13 +3,21 @@ import { Button, Form, Input } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useThemeStore } from "../../store/themeStore";
+import { useAuthStore } from "../../store/authStore";
 
 const SignIn = () => {
+  const signIn = useAuthStore((store) => store.signIn);
   const toggleDarkMode = useThemeStore((store) => store.toggleDarkMode);
   const navigate = useNavigate();
   const onFinish = (values: any) => {
-    console.log("Received values:", values);
-    // Handle form submission logic here
+    try {
+      const { email, password } = values;
+      if (email && password) {
+        signIn(email, password);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div className="w-full h-full text-primaryDark dark:text-white">

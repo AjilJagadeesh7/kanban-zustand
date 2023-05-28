@@ -1,18 +1,24 @@
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Form values:", values);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gray-200">
-      <div className="w-full max-w-sm bg-gray-100 shadow-xl rounded-lg p-6">
+    <div className="w-full h-full text-primaryDark dark:text-white rounded-md">
+      <div
+        className="w-full h-full py-[30%] bg-primaryLight dark:bg-secondaryDark
+        rounded-md p-6"
+      >
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
-        <Form onFinish={onFinish}>
+        <Form className="flex flex-col text-center" onFinish={onFinish}>
           <Form.Item
+            className="w-[90%] md:w-[75%] xl:w-[50%] self-center"
             name="firstName"
             rules={[
               { required: true, message: "Please enter your first name" },
@@ -21,12 +27,14 @@ const RegisterForm = () => {
             <Input prefix={<UserOutlined />} placeholder="First Name" />
           </Form.Item>
           <Form.Item
+            className="w-[90%] md:w-[75%] xl:w-[50%] self-center"
             name="lastName"
             rules={[{ required: true, message: "Please enter your last name" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Last Name" />
           </Form.Item>
           <Form.Item
+            className="w-[90%] md:w-[75%] xl:w-[50%] self-center"
             name="email"
             rules={[
               { required: true, message: "Please enter your email" },
@@ -36,16 +44,27 @@ const RegisterForm = () => {
             <Input prefix={<UserOutlined />} placeholder="Email" />
           </Form.Item>
           <Form.Item
+            className="w-[90%] md:w-[75%] xl:w-[50%] self-center"
             name="password"
             rules={[{ required: true, message: "Please enter your password" }]}
           >
             <Input.Password prefix={<LockOutlined />} placeholder="Password" />
           </Form.Item>
-          <Form.Item>
+          <Form.Item className="w-[90%] md:w-[75%] xl:w-[50%] self-center">
             <Button type="primary" htmlType="submit" block>
               Register
             </Button>
           </Form.Item>
+          <div className="font-normal text-xs text-primaryDark dark:text-white">
+            Already have an account?{" "}
+            <span
+              className="underline font-medium text-xs cursor-pointer
+               dark:text-red-500 text-red-800"
+              onClick={() => navigate("/signin")}
+            >
+              Log in here!
+            </span>
+          </div>
         </Form>
       </div>
     </div>

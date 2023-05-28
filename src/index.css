@@ -22,5 +22,15 @@
 }
 
 .ant-btn-primary:not([disabled]) {
-  background: #0f172a !important;
+  background: #341f84 !important;
+  border: 0;
+  color: white;
+  font-weight: 600;
+}
+
+.dark .ant-btn-primary:not([disabled]) {
+  background: #6356fe !important;
+  border: 0;
+  color: white;
+  font-weight: 600;
 }

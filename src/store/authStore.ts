@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create, StateCreator, StoreApi } from "zustand";
 import { persist } from "zustand/middleware";
 import {
   createUserWithEmailAndPassword,
@@ -8,7 +8,28 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
 
-const authStore = (set) => ({
+export interface User {
+  display: string;
+  email: string;
+  refreshToken: string;
+  uid: string;
+}
+
+interface AuthStore {
+  user: User | {};
+  createUser: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+}
+
+const authStore: StateCreator<AuthStore> = (
+  set: StoreApi<AuthStore>["setState"]
+): AuthStore => ({
   user: {},
   createUser: async (email, password, firstName, lastName) => {
     try {
@@ -68,7 +89,7 @@ const authStore = (set) => ({
   },
 });
 
-const updateDisplayName = async (user, displayName) => {
+const updateDisplayName = async (user: any, displayName: string) => {
   try {
     await updateProfile(user, { displayName });
   } catch (error) {

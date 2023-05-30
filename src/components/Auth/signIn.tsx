@@ -15,8 +15,8 @@ const SignIn = () => {
       if (email && password) {
         signIn(email, password);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     }
   };
   return (

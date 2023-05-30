@@ -52,7 +52,7 @@ const authStore: StateCreator<AuthStore> = (
         },
       }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
   signIn: async (email, password) => {
@@ -74,7 +74,7 @@ const authStore: StateCreator<AuthStore> = (
         }));
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   },
   signOut: async () => {
@@ -84,7 +84,7 @@ const authStore: StateCreator<AuthStore> = (
         user: {},
       }));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   },
 });
@@ -93,7 +93,7 @@ const updateDisplayName = async (user: any, displayName: string) => {
   try {
     await updateProfile(user, { displayName });
   } catch (error) {
-    console.log("Error updating display name:", error);
+    console.error("Error updating display name:", error);
   }
 };
 

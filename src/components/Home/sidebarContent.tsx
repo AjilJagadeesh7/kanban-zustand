@@ -19,6 +19,7 @@ const SidebarContent = ({
   const signOut = useAuthStore((store) => store.signOut);
   const fetchBoards = useBoardStore((store) => store.fetchBoards, shallow);
   const boardsList = useBoardStore((store) => store.kanbanBoards, shallow);
+  const setSelectedBoard = useBoardStore((store) => store.setSelectedBoards);
   const boardsLoading = useBoardStore((store) => store.isLoading);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const SidebarContent = ({
     if (isVisible) {
       fetchBoards();
     }
-  }, [boardsList.length, isVisible]);
+  }, [isVisible, boardsList.length]);
 
   const handleSignOut = async () => {
     try {
@@ -54,6 +55,7 @@ const SidebarContent = ({
         <div
           className="dark:bg-primaryDark my-2 p-2 rounded-md text-xs"
           key={key}
+          onClick={() => setSelectedBoard(boards?.id)}
         >
           {boards?.title}
         </div>

@@ -2,23 +2,30 @@ import React, { useState } from "react";
 import Kanban from "../kanban-board/kanban";
 import SidebarContent from "./sidebarContent";
 import SideBarDrawer from "./sideBarDrawer";
+import { useBoardAddModalStore } from "../../store/boardModalStore";
+import BoardAddModal from "./boardAddModal";
+import { useBoardStore } from "../../store/boardStore";
+import { shallow } from "zustand/shallow";
 
 const Home = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [selectedBoard, setSelectedBoard] = useState<string | null>(null);
+  const toggleBoardAddModal = useBoardAddModalStore(
+    (store) => store.toggleModal
+  );
 
+  const [open, setOpen] = useState<boolean>(false);
+  const selectedBoard = useBoardStore((store) => store.selectedBoard, shallow);
   const showDrawer = () => {
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
+
   const handleAddBoard = async () => {
-    try {
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
+    toggleBoardAddModal();
   };
+
   const fillerText =
     "No boards selected. Enhance your productivity by selecting or creating a board.";
 
@@ -44,6 +51,7 @@ const Home = () => {
         onClose={onClose}
         open={open}
       />
+      <BoardAddModal />
     </div>
   );
 };

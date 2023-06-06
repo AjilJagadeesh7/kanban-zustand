@@ -6,6 +6,7 @@ import {
   doc,
   setDoc,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { persist } from "zustand/middleware";
@@ -37,6 +38,15 @@ const boardStore = (set) => {
       console.error(error);
     }
   };
+  const deleteBoard = async (id) => {
+    try {
+      await deleteDoc(doc(db, "kanbanBoard", id));
+      await fetchBoards();
+      set(() => ({ selectedBoard: null }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return {
     board: {},
     kanbanBoards: [],
@@ -52,6 +62,7 @@ const boardStore = (set) => {
     setLoading: (isLoading) => set(() => ({ isLoading })),
     fetchBoards,
     addBoard,
+    deleteBoard,
   };
 };
 

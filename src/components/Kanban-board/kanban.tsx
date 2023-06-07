@@ -28,8 +28,8 @@ const Kanban = ({ selectedBoard }: { selectedBoard: any }) => {
         flex-col flex-wrap overflow-y-auto"
       >
         {selectedBoard?.columns?.length ? (
-          selectedBoard?.columns?.map((column) => {
-            return <Columns state={column} />;
+          selectedBoard?.columns?.map((column, key) => {
+            return <Columns key={key} state={column} />;
           })
         ) : (
           <div>No Columns available</div>

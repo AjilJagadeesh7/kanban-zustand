@@ -52,6 +52,7 @@ const boardStore = (set) => {
     kanbanBoards: [],
     selectedBoard: {},
     isLoading: false,
+    isLoadingBoard: false,
     setKanbanBoards: (data) => set(() => ({ kanbanBoards: data })),
     setSelectedBoards: (id) =>
       set((state) => ({
@@ -60,6 +61,7 @@ const boardStore = (set) => {
       })),
     setBoard: (data) => set(() => ({ board: data })),
     setLoading: (isLoading) => set(() => ({ isLoading })),
+    setLoadingBoard: (isLoading) => set(() => ({ isLoading })),
     fetchBoards,
     addBoard,
     deleteBoard,

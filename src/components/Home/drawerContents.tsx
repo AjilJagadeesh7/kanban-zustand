@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useBoardStore } from "../../store/boardStore";
 import { shallow } from "zustand/shallow";
 import { PlusOutlined } from "@ant-design/icons";
+import CustomSpinner from "../Reusable/customSpinner";
 
 const DrawerContents = ({
   handleAddBoard,
@@ -29,9 +30,33 @@ const DrawerContents = ({
       console.error(error);
     }
   };
-  if (boardsLoading) {
-    return <>Loading...</>;
-  }
+  const boardListContent = () => {
+    if (boardsLoading) {
+      return (
+        <div className="flex justify-center items-center w-full h-[80%]">
+          <CustomSpinner />
+        </div>
+      );
+    }
+    return (
+      <>
+        {boardsList.length > 0 ? (
+          boardsList.map((boards, key) => {
+            return (
+              <div
+                className="dark:bg-primaryDark my-2 p-2 rounded-md text-xs"
+                key={key}
+              >
+                {boards?.title}
+              </div>
+            );
+          })
+        ) : (
+          <>Add more boards</>
+        )}
+      </>
+    );
+  };
   return (
     <div
       className="py-3 flex h-full w-full flex-col justify-between 
@@ -50,20 +75,7 @@ const DrawerContents = ({
           >
             <PlusOutlined className="text-lg dark:text-primaryLight" />
           </div>
-          {boardsList.length > 0 ? (
-            boardsList.map((boards, key) => {
-              return (
-                <div
-                  className="dark:bg-primaryDark my-2 p-2 rounded-md text-xs"
-                  key={key}
-                >
-                  {boards?.title}
-                </div>
-              );
-            })
-          ) : (
-            <>Add more boards</>
-          )}
+          {boardListContent()}
         </div>
       </div>
       <Button className="" type="primary" onClick={handleSignOut}>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useBoardStore } from "../../store/boardStore";
 import { shallow } from "zustand/shallow";
 import { PlusOutlined } from "@ant-design/icons";
+import CustomSpinner from "../Reusable/customSpinner";
 
 const SidebarContent = ({
   handleAddBoard,
@@ -48,7 +49,11 @@ const SidebarContent = ({
   };
   const boardsContent = () => {
     if (boardsLoading) {
-      return <>Loading...</>;
+      return (
+        <div className="flex w-full justify-center items-center h-[90%]">
+          <CustomSpinner />
+        </div>
+      );
     }
     const loadedBoards = boardsList.length ? (
       boardsList.map((boards, key) => (
@@ -82,7 +87,8 @@ const SidebarContent = ({
         </p>
         <div
           className="dark:bg-teritiaryDark dark:text-white mx-[5%] 
-            p-2 rounded-md shadow-xl drop-shadow-xl h-[80%] overflow-y-auto custom-scroll"
+            p-2 rounded-md shadow-xl drop-shadow-xl h-[90%] overflow-y-auto 
+            custom-scroll"
         >
           <div
             className="text-center dark:bg-primaryDark my-2 px-2 py-1 border-dashed 

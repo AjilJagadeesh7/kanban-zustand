@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Kanban from "../kanban-board/kanban";
-import SidebarContent from "./sidebarContent";
 import SideBarDrawer from "./sideBarDrawer";
 import { useBoardAddModalStore } from "../../store/boardModalStore";
 import BoardAddModal from "./boardAddModal";
@@ -23,6 +22,7 @@ const Home = () => {
   };
 
   const handleAddBoard = async () => {
+    setOpen(false);
     toggleBoardAddModal();
   };
 
@@ -31,13 +31,8 @@ const Home = () => {
 
   return (
     <div className="w-full h-full flex">
-      <div
-        className="absolute md:hidden w-10 h-10 bg-white bottom-2 left-2"
-        onClick={showDrawer}
-      ></div>
-      <SidebarContent handleAddBoard={handleAddBoard} />
       {selectedBoard ? (
-        <Kanban selectedBoard={selectedBoard} />
+        <Kanban selectedBoard={selectedBoard} showDrawer={showDrawer} />
       ) : (
         <div className="dark:text-white px-10 text-primaryDark w-full flex justify-center flex-col text-center">
           <p className="text-lg font-semibold">{fillerText}</p>

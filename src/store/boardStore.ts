@@ -24,6 +24,7 @@ const boardStore = (set) => {
       const boardsList = querySnapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() };
       });
+
       set(() => ({ kanbanBoards: boardsList, isLoading: false }));
     } catch (error) {
       console.error(error);
@@ -42,7 +43,8 @@ const boardStore = (set) => {
     try {
       await deleteDoc(doc(db, "kanbanBoard", id));
       await fetchBoards();
-      set(() => ({ selectedBoard: null }));
+      useBoardStore.getState().selectedBoard.id === id &&
+        set(() => ({ selectedBoard: null }));
     } catch (error) {
       console.error(error);
     }
@@ -54,10 +56,9 @@ const boardStore = (set) => {
     isLoading: false,
     isLoadingBoard: false,
     setKanbanBoards: (data) => set(() => ({ kanbanBoards: data })),
-    setSelectedBoards: (id) =>
+    setSelectedBoards: (board) =>
       set((state) => ({
-        selectedBoard:
-          state.kanbanBoards.find((board) => board.id === id) || null,
+        selectedBoard: board || null,
       })),
     setBoard: (data) => set(() => ({ board: data })),
     setLoading: (isLoading) => set(() => ({ isLoading })),

@@ -1,10 +1,8 @@
-import { Button } from "antd";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuthStore } from "../../store/authStore";
-import { useNavigate } from "react-router-dom";
 import { useBoardStore } from "../../store/boardStore";
 import { shallow } from "zustand/shallow";
-import { PlusOutlined } from "@ant-design/icons";
+import { DeleteFilled, PlusOutlined } from "@ant-design/icons";
 import CustomSpinner from "../Reusable/customSpinner";
 
 const DrawerContents = ({
@@ -12,24 +10,17 @@ const DrawerContents = ({
 }: {
   handleAddBoard: () => Promise<void>;
 }) => {
-  const signOut = useAuthStore((store) => store.signOut);
-  const navigate = useNavigate();
   const fetchBoards = useBoardStore((store) => store.fetchBoards, shallow);
   const boardsList = useBoardStore((store) => store.kanbanBoards, shallow);
   const boardsLoading = useBoardStore((store) => store.isLoading);
+  const setSelectedBoards = useBoardStore((store) => store.setSelectedBoards);
+  const deleteBoard = useBoardStore((store) => store.deleteBoard);
+  const user = useAuthStore((store) => store.user);
 
   useEffect(() => {
     fetchBoards();
   }, [boardsList.length]);
 
-  const handleSignOut = async () => {
-    try {
-      signOut();
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const boardListContent = () => {
     if (boardsLoading) {
       return (
@@ -44,10 +35,27 @@ const DrawerContents = ({
           boardsList.map((boards, key) => {
             return (
               <div
-                className="dark:bg-primaryDark my-2 p-2 rounded-md text-xs"
+                className="dark:bg-teritiaryDark my-2 py-3 px-2 rounded-md
+                cursor-pointer flex justify-between items-center"
                 key={key}
               >
-                {boards?.title}
+                <div
+                  className="text-xs font-semibold"
+                  onClick={() => {
+                    setSelectedBoards(boards);
+                  }}
+                >
+                  {boards?.title}
+                </div>
+                {boards?.createdBy === user?.uid ? (
+                  <DeleteFilled
+                    className="text-sm mb-1 hover:scale-105 
+                    hover:text-red-500 active:text-red-800"
+                    onClick={() => {
+                      deleteBoard(boards.id);
+                    }}
+                  />
+                ) : null}
               </div>
             );
           })
@@ -60,17 +68,17 @@ const DrawerContents = ({
   return (
     <div
       className="py-3 flex h-full w-full flex-col justify-between 
-      items-center dark:bg-secondaryDark bg-secondaryLight"
+      items-center bg-secondaryDark rounded-md"
     >
       <div className="w-full h-full">
         <div
-          className="dark:bg-teritiaryDark dark:text-white mx-[5%] 
-            p-2 rounded-md shadow-xl drop-shadow-xl h-[80%] overflow-y-auto custom-scroll"
+          className=" dark:text-white mx-[5%] 
+            p-2 rounded-md h-full overflow-y-auto custom-scroll"
         >
           <div
-            className="text-center dark:bg-primaryDark my-2 px-2 py-1 border-dashed 
-            dark:border-white border-primaryDark border rounded-md text-xs 
-            cursor-pointer hover:scale-105"
+            className="text-center dark:bg-secondaryDark my-2 px-2 py-1 border-dashed 
+            dark:border-white border-primaryDark border-[0.12rem] rounded-md text-xs 
+            cursor-pointer hover:dark:bg-teritiaryDark hover:dark:bg-opacity-25"
             onClick={handleAddBoard}
           >
             <PlusOutlined className="text-lg dark:text-primaryLight" />
@@ -78,9 +86,6 @@ const DrawerContents = ({
           {boardListContent()}
         </div>
       </div>
-      <Button className="" type="primary" onClick={handleSignOut}>
-        Sign out
-      </Button>
     </div>
   );
 };

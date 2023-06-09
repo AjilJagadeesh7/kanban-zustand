@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import Columns from "./columns";
 import TaskInput from "../Tasks/taskInput";
-import { DeleteFilled } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { useBoardStore } from "../../store/boardStore";
 import { useTaskStore } from "../../store/taskStore";
 
-const Kanban = ({ selectedBoard }: { selectedBoard: any }) => {
+const Kanban = ({
+  selectedBoard,
+  showDrawer,
+}: {
+  selectedBoard: any;
+  showDrawer: () => void;
+}) => {
   const deleteBoard = useBoardStore((store) => store.deleteBoard);
   const fetchTask = useTaskStore((store) => store.fetchTask);
   useEffect(() => {
@@ -15,18 +21,12 @@ const Kanban = ({ selectedBoard }: { selectedBoard: any }) => {
   return (
     <div className="bg-gray-900 min-h-screen w-full overflow-x-hidden custom-scroll">
       <div className="w-full flex justify-between p-2">
+        <MenuOutlined
+          className="text-xl text-white hover:scale-105 cursor-pointer"
+          onClick={showDrawer}
+        />
         <div className="text-xl font-semibold text-white">
           {selectedBoard?.title?.toUpperCase() || ""}
-        </div>
-        <div
-          className="flex items-center justify-center bg-red-800 rounded-md 
-        p-1 hover:scale-110 cursor-pointer active:bg-red-900 select-none"
-          onClick={() => deleteBoard(selectedBoard?.id)}
-        >
-          <DeleteFilled className="text-white" />
-          <div className="text-center text-xs font-semibold text-white p-1">
-            Delete
-          </div>
         </div>
       </div>
       <div

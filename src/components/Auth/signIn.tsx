@@ -1,13 +1,10 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useThemeStore } from "../../store/themeStore";
 import { useAuthStore } from "../../store/authStore";
 
 const SignIn = () => {
   const signIn = useAuthStore((store) => store.signIn);
-  const toggleDarkMode = useThemeStore((store) => store.toggleDarkMode);
   const navigate = useNavigate();
   const onFinish = (values: any) => {
     try {
@@ -25,12 +22,7 @@ const SignIn = () => {
         className="w-full h-full py-[30%] dark:bg-secondaryDark bg-primaryLight
         rounded-md p-6"
       >
-        <h2
-          className="text-2xl font-bold mb-4 text-center"
-          onClick={() => toggleDarkMode()}
-        >
-          Sign In
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
         <Form className="flex flex-col text-center" onFinish={onFinish}>
           <Form.Item
             className="w-[90%] md:w-[75%] xl:w-[50%] self-center"

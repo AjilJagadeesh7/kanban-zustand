@@ -50,7 +50,7 @@ const taskStore: StateCreator<TaskStoreState> = (set) => {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(taskList, selectedBoard.id);
+
       set(() => ({
         tasks: taskList,
         taskIsLoading: false,

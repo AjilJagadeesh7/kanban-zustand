@@ -1,13 +1,12 @@
 import { useTaskStore } from "../../store/taskStore";
 import { shallow } from "zustand/shallow";
 import { useState } from "react";
-import moment from "moment";
 import { Button, Input, Modal } from "antd";
 import { useInputModalStore } from "../../store/inputStore";
 import { CloseOutlined } from "@ant-design/icons";
 import React from "react";
 
-const TaskInput = () => {
+const TaskInput = ({ boardId }: { boardId: string }) => {
   const [input, setInput] = useState<string>("");
 
   const addTask = useTaskStore((store) => store.addTask, shallow);
@@ -15,7 +14,7 @@ const TaskInput = () => {
 
   const handleAddTask = () => {
     if (input) {
-      addTask(input, modal.state, moment());
+      addTask(input, modal.state);
       setInput("");
       modal.toggleModal();
       //show success alert
@@ -32,6 +31,7 @@ const TaskInput = () => {
     <Modal
       closable={false}
       open={modal.show}
+      centered
       onCancel={handleModalClosing}
       footer={null}
     >

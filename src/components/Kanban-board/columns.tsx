@@ -7,7 +7,10 @@ import React from "react";
 
 const Columns = ({ state }) => {
   const tasks = useTaskStore(
-    (store) => store?.tasks.filter((task) => task?.state === state),
+    (store) =>
+      store?.tasks.filter(
+        (task) => task?.state?.toLowerCase() === state?.toLowerCase()
+      ),
     shallow
   );
   const draggedTask = useTaskStore((store) => store.draggedTask);

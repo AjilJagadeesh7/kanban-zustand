@@ -36,7 +36,7 @@ const Kanban = ({ selectedBoard }: { selectedBoard: any }) => {
         )}
       </div>
 
-      <TaskInput />
+      <TaskInput boardId={selectedBoard.id} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Kanban from "../kanban-board/kanban";
 import SidebarContent from "./sidebarContent";
 import SideBarDrawer from "./sideBarDrawer";

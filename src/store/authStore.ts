@@ -80,6 +80,7 @@ const authStore: StateCreator<AuthStore> = (
   signOut: async () => {
     try {
       await signOut(auth);
+      localStorage.clear();
       set((store) => ({
         user: {},
       }));

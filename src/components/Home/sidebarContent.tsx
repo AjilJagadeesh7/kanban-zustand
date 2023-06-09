@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Avatar, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { User, useAuthStore } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
@@ -78,16 +78,17 @@ const SidebarContent = ({
       items-center dark:bg-secondaryDark bg-secondaryLight"
     >
       <div className="w-full h-full">
-        <p
+        <div
           className="dark:text-white text-primaryDark
             dark:bg-teritiaryDark bg-secondaryLight p-2 rounded-md shadow-xl 
-            drop-shadow-xl mx-[5%] text-center font-medium text-sm"
+            drop-shadow-xl mx-[5%] text-center font-medium text-sm mb-2 flex-flex-col"
         >
-          {display}
-        </p>
+          <Avatar size={50} />
+          <div className="mt-2">{display}</div>
+        </div>
         <div
           className="dark:bg-teritiaryDark dark:text-white mx-[5%] 
-            p-2 rounded-md shadow-xl drop-shadow-xl h-[90%] overflow-y-auto 
+            p-2 rounded-md shadow-xl drop-shadow-xl h-[80%] overflow-y-auto 
             custom-scroll"
         >
           <div

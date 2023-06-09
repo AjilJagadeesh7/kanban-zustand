@@ -1,4 +1,4 @@
-import { Button, Drawer, Space } from "antd";
+import { Avatar, Button, Drawer, Space } from "antd";
 import React from "react";
 import DrawerContents from "./drawerContents";
 import { User, useAuthStore } from "../../store/authStore";
@@ -15,7 +15,12 @@ const SideBarDrawer = ({
   const { display } = useAuthStore((store) => store.user as User);
   return (
     <Drawer
-      title={<div className="dark:text-white">{display}</div>}
+      title={
+        <div className="dark:text-white flex gap-2 items-center">
+          <Avatar size={40} />
+          {display}
+        </div>
+      }
       placement="right"
       closable={false}
       onClose={onClose}

@@ -3,12 +3,11 @@ import { useTaskStore } from "../../store/taskStore";
 import { shallow } from "zustand/shallow";
 import Task from "../Tasks/task";
 import { useInputModalStore } from "../../store/inputStore";
-import React from "react";
 
-const Columns = ({ state }) => {
+const Columns = ({ state }: { state: string; boardId: string }) => {
   const tasks = useTaskStore(
     (store) =>
-      store?.tasks.filter(
+      store?.tasks?.filter(
         (task) => task?.state?.toLowerCase() === state?.toLowerCase()
       ),
     shallow
@@ -17,6 +16,7 @@ const Columns = ({ state }) => {
   const moveTask = useTaskStore((store) => store.moveTask);
   const setDraggedTask = useTaskStore((store) => store.setDraggedTask, shallow);
   const modal = useInputModalStore((state) => state, shallow);
+
   return (
     <div
       onDragOver={(e) => {
@@ -24,7 +24,7 @@ const Columns = ({ state }) => {
       }}
       onDrop={(e) => {
         setDraggedTask(null);
-        moveTask(draggedTask, state);
+        draggedTask && moveTask(draggedTask, state);
       }}
       className="bg-gray-800 min-h-[20rem] text-white w-[70%] md:w-[33%] 
       max-w-[20rem] mx-2 rounded-[4px] p-2 my-10"

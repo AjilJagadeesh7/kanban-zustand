@@ -42,6 +42,16 @@ const boardStore = (set) => {
   const deleteBoard = async (id) => {
     try {
       await deleteDoc(doc(db, "kanbanBoard", id));
+      const q = await query(
+        collection(db, "tasks"),
+        where("boardId", "==", id)
+      );
+      const tasksSnapshot = await getDocs(q);
+      console.log("q and tasksnapshot", tasksSnapshot, q);
+      tasksSnapshot.forEach(async (taskDoc) => {
+        const result = await deleteDoc(doc(db, "tasks", taskDoc.id));
+        console.log(result);
+      });
       await fetchBoards();
       useBoardStore.getState().selectedBoard.id === id &&
         set(() => ({ selectedBoard: null }));

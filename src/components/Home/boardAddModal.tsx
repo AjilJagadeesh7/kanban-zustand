@@ -39,6 +39,7 @@ const BoardAddModal = () => {
     }
     setBoardTitle("");
     setColumnTitles([""]);
+    board.toggleModal();
   };
 
   return (

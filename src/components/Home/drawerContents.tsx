@@ -36,11 +36,11 @@ const DrawerContents = ({
             return (
               <div
                 className="dark:bg-teritiaryDark bg-teritiaryLight my-2
-                px-2 rounded-md flex justify-between items-center"
+                px-2 rounded-md flex justify-between items-center text-white"
                 key={key}
               >
                 <div
-                  className="text-xs font-semibold w-full cursor-pointer py-3"
+                  className="text-xs  font-semibold w-full cursor-pointer py-3"
                   onClick={() => {
                     setSelectedBoards(boards);
                   }}
@@ -77,12 +77,12 @@ const DrawerContents = ({
         >
           <div
             className="text-center dark:bg-secondaryDark bg-secondaryLight my-2 px-2 py-1 border-dashed 
-            dark:border-white border-primaryDark border-[0.12rem] rounded-md text-xs 
+            border-white  border-[0.12rem] rounded-md text-xs 
             cursor-pointer hover:dark:bg-teritiaryDark hover:bg-teritiaryLight hover:bg-opacity-25 
             hover:dark:bg-opacity-25"
             onClick={handleAddBoard}
           >
-            <PlusOutlined className="text-lg dark:text-primaryLight" />
+            <PlusOutlined className="text-lg text-primaryLight" />
           </div>
           {boardListContent()}
         </div>

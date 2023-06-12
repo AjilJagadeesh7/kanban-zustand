@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button, Input, Modal } from "antd";
 import { useInputModalStore } from "../../store/inputStore";
 import { CloseOutlined } from "@ant-design/icons";
-import React from "react";
 
 const TaskInput = ({ boardId }: { boardId: string }) => {
   const [input, setInput] = useState<string>("");
@@ -35,10 +34,10 @@ const TaskInput = ({ boardId }: { boardId: string }) => {
       onCancel={handleModalClosing}
       footer={null}
     >
-      <div className="bg-slate-700 p-2 rounded-md flex flex-col gap-5">
+      <div className="bg-primaryLight dark:bg-secondaryDark p-2 rounded-md flex flex-col gap-5">
         <div className="flex w-full px-3 justify-between">
-          <div className="text-lg font-semibold text-white self-center">
-            Create {modal.state.toLowerCase()} task
+          <div className="text-lg font-semibold dark:text-white self-center">
+            CREATE {modal.state.toUpperCase()} TASK
           </div>
           <div>
             <CloseOutlined
@@ -59,7 +58,7 @@ const TaskInput = ({ boardId }: { boardId: string }) => {
             }}
           />
           <Button
-            className="mt-5 border-none bg-green-700 hover:bg-green-700 text-white"
+            className="mt-5 border-none bg-indigo-800 hover:bg-indigo-700 dark:bg-blue-700 dark:hover:bg-blue-700 text-white"
             onClick={handleAddTask}
           >
             Submit

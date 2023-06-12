@@ -35,12 +35,12 @@ const DrawerContents = ({
           boardsList.map((boards, key) => {
             return (
               <div
-                className="dark:bg-teritiaryDark my-2 py-3 px-2 rounded-md
-                cursor-pointer flex justify-between items-center"
+                className="dark:bg-teritiaryDark bg-teritiaryLight my-2
+                px-2 rounded-md flex justify-between items-center"
                 key={key}
               >
                 <div
-                  className="text-xs font-semibold"
+                  className="text-xs font-semibold w-full cursor-pointer py-3"
                   onClick={() => {
                     setSelectedBoards(boards);
                   }}
@@ -68,17 +68,18 @@ const DrawerContents = ({
   return (
     <div
       className="py-3 flex h-full w-full flex-col justify-between 
-      items-center bg-secondaryDark rounded-md"
+      items-center dark:bg-secondaryDark bg-secondaryLight rounded-md"
     >
       <div className="w-full h-full">
         <div
-          className=" dark:text-white mx-[5%] 
+          className=" dark:text-white text-primaryDark mx-[5%] 
             p-2 rounded-md h-full overflow-y-auto custom-scroll"
         >
           <div
-            className="text-center dark:bg-secondaryDark my-2 px-2 py-1 border-dashed 
+            className="text-center dark:bg-secondaryDark bg-secondaryLight my-2 px-2 py-1 border-dashed 
             dark:border-white border-primaryDark border-[0.12rem] rounded-md text-xs 
-            cursor-pointer hover:dark:bg-teritiaryDark hover:dark:bg-opacity-25"
+            cursor-pointer hover:dark:bg-teritiaryDark hover:bg-teritiaryLight hover:bg-opacity-25 
+            hover:dark:bg-opacity-25"
             onClick={handleAddBoard}
           >
             <PlusOutlined className="text-lg dark:text-primaryLight" />

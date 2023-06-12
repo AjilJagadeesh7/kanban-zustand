@@ -34,7 +34,7 @@ const SideBarDrawer = ({
     <Drawer
       title={
         <div
-          className="dark:text-white flex flex-col justify-center items-center bg-secondaryDark
+          className="dark:text-white flex flex-col justify-center items-center bg-secondaryLight dark:bg-secondaryDark
         p-2 rounded-md"
         >
           <div
@@ -55,7 +55,7 @@ const SideBarDrawer = ({
             <div
               className="flex gap-1 items-center justify-center py-1 px-3
             bg-sky-800 rounded-sm shadow-md hover:bg-sky-700 active:bg-sky-900
-            cursor-pointer"
+            cursor-pointer text-white"
               onClick={handleEdit}
             >
               <EditFilled /> <div>Edit</div>
@@ -63,7 +63,7 @@ const SideBarDrawer = ({
             <div
               className="flex gap-1 items-center justify-center py-1 px-3
             bg-red-800 rounded-sm shadow-md hover:bg-red-700 active:bg-red-900
-            cursor-pointer"
+            cursor-pointer text-white"
               onClick={handleSignOut}
             >
               <UnlockFilled />
@@ -82,7 +82,7 @@ const SideBarDrawer = ({
       onClose={onClose}
       open={open}
       style={{
-        backgroundColor: "#111827",
+        backgroundColor: theme.darkMode ? "#111827" : "#E4FBFF",
       }}
     >
       <DrawerContents handleAddBoard={handleAddBoard} />

@@ -25,7 +25,7 @@ const Kanban = ({
           className="text-xl text-white hover:scale-105 cursor-pointer"
           onClick={showDrawer}
         />
-        <div className="text-xl font-semibold text-white">
+        <div className="text-xl font-semibold text-white select-none">
           {selectedBoard?.title?.toUpperCase() || ""}
         </div>
       </div>
@@ -40,7 +40,7 @@ const Kanban = ({
             );
           })
         ) : (
-          <div>No Columns available</div>
+          <div className="text-white">Select a board</div>
         )}
       </div>
 

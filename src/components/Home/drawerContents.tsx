@@ -13,6 +13,7 @@ const DrawerContents = ({
   const fetchBoards = useBoardStore((store) => store.fetchBoards, shallow);
   const boardsList = useBoardStore((store) => store.kanbanBoards, shallow);
   const boardsLoading = useBoardStore((store) => store.isLoading);
+  const selectedBoard = useBoardStore((store) => store.selectedBoard);
   const setSelectedBoards = useBoardStore((store) => store.setSelectedBoards);
   const deleteBoard = useBoardStore((store) => store.deleteBoard);
   const user = useAuthStore((store) => store.user);
@@ -35,8 +36,14 @@ const DrawerContents = ({
           boardsList.map((boards, key) => {
             return (
               <div
-                className="dark:bg-teritiaryDark bg-teritiaryLight my-2
-                px-2 rounded-md flex justify-between items-center text-white"
+                className={`hover:dark:bg-teritiaryDark hover:bg-teritiaryLight my-2
+                px-2 rounded-md flex ${
+                  selectedBoard.id === boards.id
+                    ? "dark:bg-teritiaryDark bg-teritiaryLight hover:bg-opacity-100"
+                    : " hover:bg-opacity-40"
+                }
+                 justify-between items-center dark:text-white
+                `}
                 key={key}
               >
                 <div
@@ -45,7 +52,7 @@ const DrawerContents = ({
                     setSelectedBoards(boards);
                   }}
                 >
-                  {boards?.title}
+                  {boards?.title.toUpperCase()}
                 </div>
                 {boards?.createdBy === user?.uid ? (
                   <DeleteFilled
